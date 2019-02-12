@@ -1,11 +1,11 @@
 {
-  "name": "sick-fits-frontend",
+  "name": "hva-store-frontend",
   "version": "1.0.0",
-  "description": "Sick Fits! An example React, GraphQL, Next and Apollo",
+  "description": "frontend of hva store",
   "main": "index.js",
   "scripts": {
-    "dev": "next -p 7777",
-    "build": "next build",
+    "dev": "next -p 7777", 
+    "build": "next build", 
     "start": "next start",
     "test": "NODE_ENV=test jest --watch",
     "test-win": "SET NODE_ENV=test&& jest --watch",
