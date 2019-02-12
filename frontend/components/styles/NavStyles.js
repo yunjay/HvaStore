@@ -5,7 +5,7 @@ const NavStyles = styled.ul`
   padding: 0;
   display: flex;
   justify-self: end;
-  font-size: 2rem;
+  font-size: 1.5rem;
   a,
   button {
     padding: 1rem 3rem;
@@ -14,7 +14,7 @@ const NavStyles = styled.ul`
     position: relative;
     text-transform: uppercase;
     font-weight: 900;
-    font-size: 1em;
+    font-size: 0.8em;
     background: none;
     border: 0;
     cursor: pointer;
@@ -35,7 +35,7 @@ const NavStyles = styled.ul`
     }
     &:after {
       height: 2px;
-      background: red;
+      background: #FF9200;
       content: '';
       width: 0;
       position: absolute;
@@ -49,7 +49,7 @@ const NavStyles = styled.ul`
     &:focus {
       outline: none;
       &:after {
-        width: calc(100% - 60px);
+        width: calc(100% - 50px);
       }
     @media (max-width: 700px) {
         width: calc(100% - 10px);
