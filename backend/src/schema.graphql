@@ -1,15 +1,14 @@
-""" graphql needed in both yoga and prisma"""
-
-type Item
+""" graphql needed in both yoga and prisma
+graphql imports with comments like below -> imports Item type"""
+# import * from './generated/prisma.graphql'
 type Mutation{
     createItem(title:String,description:String,image: String,
   largeimage: String,
   price: Int,
   createAt: DateTime,
-  updatedAt: DateTime,) :
-  Item!
+  updatedAt: DateTime,) : Item!
 }
 
 type Query{
-
+    itmes:[Item]!
 }
