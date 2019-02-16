@@ -5,10 +5,10 @@ type Mutation{
     createItem(title:String,description:String,image: String,
   largeimage: String,
   price: Int,
-  createAt: DateTime,
+  createdAt: DateTime,
   updatedAt: DateTime,) : Item!
 }
 
 type Query{
-    itmes:[Item]!
+    items:[Item]!
 }
