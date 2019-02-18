@@ -1,7 +1,7 @@
 import App, {Container} from 'next/app';
 import Page from '../components/Page';
 import {ApolloProvider} from 'react-apollo';
-import withData from './lib/withData'; //createClient we made
+import withData from '../lib/withData'; //createClient we made
 //next js automatically wraps your shit in <App>.
 //This is a customized App extending App  from next/app
 //
