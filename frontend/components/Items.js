@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import {Query} from'react-apollo';
+import {Query} from 'react-apollo';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 import Item from './Item';
-
 
 //as if in graphql playground
 const ALL_ITEMS_QUERY= gql`

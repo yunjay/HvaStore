@@ -18,9 +18,10 @@ export default class Item extends Component {
 
   render() {
       const item = this.props.item;
-
+            
       return( 
         <ItemStyles>
+            {item.image ? <img src={item.image} alt={item.title}/>:null}
             <Title>
                 <Link href={{
                     pathname:'/item',
@@ -32,6 +33,16 @@ export default class Item extends Component {
             <PriceTag>
                 {formatMoney(item.price)}
             </PriceTag>
+            <p>{item.description}</p>
+
+            <div className="buttonList">
+                <Link href={{pathname:"update",query:{id:item.id}}}>
+                    <a>편집🖋️</a>
+                </Link>
+                <button>장바구니에 넣기</button>
+                <button>삭제</button>
+            </div>
+
         </ItemStyles>
         );
     }
