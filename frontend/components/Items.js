@@ -50,3 +50,4 @@ class Items extends Component {
 } 
 //render props instead of high order component
 export default Items;
+export {ALL_ITEMS_QUERY};

@@ -1,4 +1,4 @@
-((window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static/development/pages/_app.js"],{
+((window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static\\development\\pages\\_app.js"],{
 
 /***/ "./components/Header.js":
 /*!******************************!*\
@@ -19,7 +19,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! nprogress */ "./node_modules/nprogress/nprogress.js");
 /* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(nprogress__WEBPACK_IMPORTED_MODULE_5__);
-var _jsxFileName = "/mnt/c/Users/steve/Desktop/HvaShop/frontend/components/Header.js";
+var _jsxFileName = "C:\\Users\\pc\\Documents\\GitHub\\HvaShop\\frontend\\components\\Header.js";
 
 
 
@@ -135,7 +135,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/head */ "./node_modules/next/head.js");
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_1__);
-var _jsxFileName = "/mnt/c/Users/steve/Desktop/HvaShop/frontend/components/Meta.js";
+var _jsxFileName = "C:\\Users\\pc\\Documents\\GitHub\\HvaShop\\frontend\\components\\Meta.js";
 
  //Stateless functional component
 
@@ -205,7 +205,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _styles_NavStyles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styles/NavStyles */ "./components/styles/NavStyles.js");
-var _jsxFileName = "/mnt/c/Users/steve/Desktop/HvaShop/frontend/components/Nav.js";
+var _jsxFileName = "C:\\Users\\pc\\Documents\\GitHub\\HvaShop\\frontend\\components\\Nav.js";
 
 
 
@@ -303,7 +303,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Header */ "./components/Header.js");
 /* harmony import */ var _components_Meta__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Meta */ "./components/Meta.js");
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-var _jsxFileName = "/mnt/c/Users/steve/Desktop/HvaShop/frontend/components/Page.js";
+var _jsxFileName = "C:\\Users\\pc\\Documents\\GitHub\\HvaShop\\frontend\\components\\Page.js";
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -3382,9 +3382,20 @@ var ObservableQuery = (function (_super) {
         });
     };
     ObservableQuery.prototype.currentResult = function () {
+        var result = this.getCurrentResult();
+        if (result.data === undefined) {
+            result.data = {};
+        }
+        return result;
+    };
+    ObservableQuery.prototype.getCurrentResult = function () {
         if (this.isTornDown) {
             return {
-                data: this.lastError ? {} : this.lastResult ? this.lastResult.data : {},
+                data: this.lastError
+                    ? undefined
+                    : this.lastResult
+                        ? this.lastResult.data
+                        : undefined,
                 error: this.lastError,
                 loading: false,
                 networkStatus: _networkStatus__WEBPACK_IMPORTED_MODULE_2__["NetworkStatus"].error,
@@ -3393,7 +3404,7 @@ var ObservableQuery = (function (_super) {
         var queryStoreValue = this.queryManager.queryStore.get(this.queryId);
         if (hasError(queryStoreValue, this.options.errorPolicy)) {
             return {
-                data: {},
+                data: undefined,
                 loading: false,
                 networkStatus: queryStoreValue.networkStatus,
                 error: new _errors_ApolloError__WEBPACK_IMPORTED_MODULE_4__["ApolloError"]({
@@ -3712,7 +3723,7 @@ var QueryManager = (function () {
         this.clientAwareness = {};
         this.idCounter = 1;
         this.queries = new Map();
-        this.fetchQueryRejectFns = new Set();
+        this.fetchQueryRejectFns = new Map();
         this.queryIdsByName = {};
         this.link = link;
         this.deduplicator = apollo_link__WEBPACK_IMPORTED_MODULE_1__["ApolloLink"].from([new apollo_link_dedup__WEBPACK_IMPORTED_MODULE_2__["DedupLink"](), link]);
@@ -3806,7 +3817,7 @@ var QueryManager = (function () {
                     refetchQueryPromises.push(_this.query(queryOptions));
                 }
                 return Promise.all(awaitRefetchQueries ? refetchQueryPromises : []).then(function () {
-                    _this.setQuery(mutationId, function () { return ({ document: undefined }); });
+                    _this.setQuery(mutationId, function () { return ({ document: null }); });
                     if (errorPolicy === 'ignore' &&
                         storeResult &&
                         Object(apollo_utilities__WEBPACK_IMPORTED_MODULE_3__["graphQLResultHasError"])(storeResult)) {
@@ -3843,7 +3854,7 @@ var QueryManager = (function () {
                         optimisticResponse: optimisticResponse,
                     });
                     _this.broadcastQueries();
-                    _this.setQuery(mutationId, function () { return ({ document: undefined }); });
+                    _this.setQuery(mutationId, function () { return ({ document: null }); });
                     reject(new _errors_ApolloError__WEBPACK_IMPORTED_MODULE_5__["ApolloError"]({
                         networkError: err,
                     }));
@@ -4104,11 +4115,14 @@ var QueryManager = (function () {
             throw new Error('pollInterval option only supported on watchQuery.');
         }
         return new Promise(function (resolve, reject) {
-            _this.fetchQueryRejectFns.add(reject);
-            _this.watchQuery(options, false)
+            var watchedQuery = _this.watchQuery(options, false);
+            _this.fetchQueryRejectFns.set("query:" + watchedQuery.queryId, reject);
+            watchedQuery
                 .result()
                 .then(resolve, reject)
-                .then(function () { return _this.fetchQueryRejectFns.delete(reject); });
+                .then(function () {
+                return _this.fetchQueryRejectFns.delete("query:" + watchedQuery.queryId);
+            });
         });
     };
     QueryManager.prototype.generateQueryId = function () {
@@ -4126,7 +4140,7 @@ var QueryManager = (function () {
             var _b = _a.listeners, listeners = _b === void 0 ? [] : _b;
             return ({
                 listeners: listeners.concat([listener]),
-                invalidate: false,
+                invalidated: false,
             });
         });
     };
@@ -4254,7 +4268,7 @@ var QueryManager = (function () {
                                 obs.complete();
                             }
                         });
-                    }
+                    },
                 };
                 var operation = _this.buildOperationForLink(transformedDoc, variables);
                 sub = Object(apollo_link__WEBPACK_IMPORTED_MODULE_1__["execute"])(_this.link, operation).subscribe(handler);
@@ -4273,6 +4287,8 @@ var QueryManager = (function () {
     };
     QueryManager.prototype.removeQuery = function (queryId) {
         var subscriptions = this.getQuery(queryId).subscriptions;
+        this.fetchQueryRejectFns.delete("query:" + queryId);
+        this.fetchQueryRejectFns.delete("fetchRequest:" + queryId);
         subscriptions.forEach(function (x) { return x.unsubscribe(); });
         this.queries.delete(queryId);
     };
@@ -4291,11 +4307,11 @@ var QueryManager = (function () {
                     variables: variables,
                     previousResult: lastResult ? lastResult.data : undefined,
                     optimistic: optimistic,
-                });
+                }) || undefined;
                 return { data: data, partial: false };
             }
             catch (e) {
-                return { data: {}, partial: true };
+                return { data: undefined, partial: true };
             }
         }
     };
@@ -4357,9 +4373,8 @@ var QueryManager = (function () {
         var operation = this.buildOperationForLink(document, variables, tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, context, { forceFetch: !this.queryDeduplication }));
         var resultFromStore;
         var errorsFromStore;
-        var rejectFetchPromise;
         return new Promise(function (resolve, reject) {
-            _this.fetchQueryRejectFns.add(rejectFetchPromise = reject);
+            _this.fetchQueryRejectFns.set("fetchRequest:" + queryId, reject);
             var subscription = Object(apollo_link__WEBPACK_IMPORTED_MODULE_1__["execute"])(_this.deduplicator, operation).subscribe({
                 next: function (result) {
                     var lastRequestId = _this.getQuery(queryId).lastRequestId;
@@ -4406,7 +4421,7 @@ var QueryManager = (function () {
                     }
                 },
                 error: function (error) {
-                    _this.fetchQueryRejectFns.delete(reject);
+                    _this.fetchQueryRejectFns.delete("fetchRequest:" + queryId);
                     _this.setQuery(queryId, function (_a) {
                         var subscriptions = _a.subscriptions;
                         return ({
@@ -4416,7 +4431,7 @@ var QueryManager = (function () {
                     reject(error);
                 },
                 complete: function () {
-                    _this.fetchQueryRejectFns.delete(reject);
+                    _this.fetchQueryRejectFns.delete("fetchRequest:" + queryId);
                     _this.setQuery(queryId, function (_a) {
                         var subscriptions = _a.subscriptions;
                         return ({
@@ -4439,7 +4454,7 @@ var QueryManager = (function () {
                 });
             });
         }).catch(function (error) {
-            _this.fetchQueryRejectFns.delete(rejectFetchPromise);
+            _this.fetchQueryRejectFns.delete("fetchRequest:" + queryId);
             throw error;
         });
     };
@@ -5148,7 +5163,7 @@ var Observable = (function (_super) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-exports.version = "2.4.12"
+exports.version = "2.4.13"
 
 /***/ }),
 
@@ -8259,7 +8274,7 @@ module.exports = function (NAME, wrapper, methods, common, IS_MAP, IS_WEAK) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-var core = module.exports = { version: '2.6.4' };
+var core = module.exports = { version: '2.6.5' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 
@@ -11287,10 +11302,51 @@ module.exports = function (data, opts) {
 
 /***/ }),
 
-/***/ "./node_modules/fbjs/lib/shallowEqual.js":
-/*!***********************************************!*\
-  !*** ./node_modules/fbjs/lib/shallowEqual.js ***!
-  \***********************************************/
+/***/ "./node_modules/fbjs/lib/hyphenate.js":
+/*!********************************************!*\
+  !*** ./node_modules/fbjs/lib/hyphenate.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * @typechecks
+ */
+
+var _uppercasePattern = /([A-Z])/g;
+
+/**
+ * Hyphenates a camelcased string, for example:
+ *
+ *   > hyphenate('backgroundColor')
+ *   < "background-color"
+ *
+ * For CSS style names, use `hyphenateStyleName` instead which works properly
+ * with all vendor prefixes, including `ms`.
+ *
+ * @param {string} string
+ * @return {string}
+ */
+function hyphenate(string) {
+  return string.replace(_uppercasePattern, '-$1').toLowerCase();
+}
+
+module.exports = hyphenate;
+
+/***/ }),
+
+/***/ "./node_modules/fbjs/lib/hyphenateStyleName.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/fbjs/lib/hyphenateStyleName.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11302,64 +11358,35 @@ module.exports = function (data, opts) {
  * LICENSE file in the root directory of this source tree.
  *
  * @typechecks
- * 
  */
 
-/*eslint-disable no-self-compare */
 
 
-var hasOwnProperty = Object.prototype.hasOwnProperty;
+var hyphenate = __webpack_require__(/*! ./hyphenate */ "./node_modules/fbjs/lib/hyphenate.js");
+
+var msPattern = /^ms-/;
+
 /**
- * inlined Object.is polyfill to avoid requiring consumers ship their own
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+ * Hyphenates a camelcased CSS property name, for example:
+ *
+ *   > hyphenateStyleName('backgroundColor')
+ *   < "background-color"
+ *   > hyphenateStyleName('MozTransition')
+ *   < "-moz-transition"
+ *   > hyphenateStyleName('msTransition')
+ *   < "-ms-transition"
+ *
+ * As Modernizr suggests (http://modernizr.com/docs/#prefixed), an `ms` prefix
+ * is converted to `-ms-`.
+ *
+ * @param {string} string
+ * @return {string}
  */
-
-function is(x, y) {
-  // SameValue algorithm
-  if (x === y) {
-    // Steps 1-5, 7-10
-    // Steps 6.b-6.e: +0 != -0
-    // Added the nonzero y check to make Flow happy, but it is redundant
-    return x !== 0 || y !== 0 || 1 / x === 1 / y;
-  } else {
-    // Step 6.a: NaN == NaN
-    return x !== x && y !== y;
-  }
-}
-/**
- * Performs equality by iterating through keys on an object and returning false
- * when any key has values which are not strictly equal between the arguments.
- * Returns true when the values of all keys are strictly equal.
- */
-
-
-function shallowEqual(objA, objB) {
-  if (is(objA, objB)) {
-    return true;
-  }
-
-  if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {
-    return false;
-  }
-
-  var keysA = Object.keys(objA);
-  var keysB = Object.keys(objB);
-
-  if (keysA.length !== keysB.length) {
-    return false;
-  } // Test for A's keys different from B.
-
-
-  for (var i = 0; i < keysA.length; i++) {
-    if (!hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {
-      return false;
-    }
-  }
-
-  return true;
+function hyphenateStyleName(string) {
+  return hyphenate(string).replace(msPattern, '-ms-');
 }
 
-module.exports = shallowEqual;
+module.exports = hyphenateStyleName;
 
 /***/ }),
 
@@ -35586,12 +35613,12 @@ module.exports = __webpack_require__(/*! ./dist/lib/link */ "./node_modules/next
 
 /***/ "./node_modules/next/node_modules/prop-types/checkPropTypes.js":
 /*!***************************************************************************************************************************!*\
-  !*** delegated ./node_modules/next/node_modules/prop-types/checkPropTypes.js from dll-reference dll_31a52253456ff2ce2646 ***!
+  !*** delegated ./node_modules/next/node_modules/prop-types/checkPropTypes.js from dll-reference dll_aea5a84f9025b36d9dbf ***!
   \***************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_31a52253456ff2ce2646 */ "dll-reference dll_31a52253456ff2ce2646"))("./node_modules/next/node_modules/prop-types/checkPropTypes.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_aea5a84f9025b36d9dbf */ "dll-reference dll_aea5a84f9025b36d9dbf"))("./node_modules/next/node_modules/prop-types/checkPropTypes.js");
 
 /***/ }),
 
@@ -36199,12 +36226,12 @@ if (true) {
 
 /***/ "./node_modules/next/node_modules/prop-types/lib/ReactPropTypesSecret.js":
 /*!*************************************************************************************************************************************!*\
-  !*** delegated ./node_modules/next/node_modules/prop-types/lib/ReactPropTypesSecret.js from dll-reference dll_31a52253456ff2ce2646 ***!
+  !*** delegated ./node_modules/next/node_modules/prop-types/lib/ReactPropTypesSecret.js from dll-reference dll_aea5a84f9025b36d9dbf ***!
   \*************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_31a52253456ff2ce2646 */ "dll-reference dll_31a52253456ff2ce2646"))("./node_modules/next/node_modules/prop-types/lib/ReactPropTypesSecret.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_aea5a84f9025b36d9dbf */ "dll-reference dll_aea5a84f9025b36d9dbf"))("./node_modules/next/node_modules/prop-types/lib/ReactPropTypesSecret.js");
 
 /***/ }),
 
@@ -37240,12 +37267,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* NProgress, 
 
 /***/ "./node_modules/object-assign/index.js":
 /*!***************************************************************************************************!*\
-  !*** delegated ./node_modules/object-assign/index.js from dll-reference dll_31a52253456ff2ce2646 ***!
+  !*** delegated ./node_modules/object-assign/index.js from dll-reference dll_aea5a84f9025b36d9dbf ***!
   \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_31a52253456ff2ce2646 */ "dll-reference dll_31a52253456ff2ce2646"))("./node_modules/object-assign/index.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_aea5a84f9025b36d9dbf */ "dll-reference dll_aea5a84f9025b36d9dbf"))("./node_modules/object-assign/index.js");
 
 /***/ }),
 
@@ -38809,6 +38836,82 @@ exports.encode = exports.stringify = __webpack_require__(/*! ./encode */ "./node
 
 /***/ }),
 
+/***/ "./node_modules/react-apollo/node_modules/fbjs/lib/shallowEqual.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/react-apollo/node_modules/fbjs/lib/shallowEqual.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * @typechecks
+ * 
+ */
+
+/*eslint-disable no-self-compare */
+
+
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+/**
+ * inlined Object.is polyfill to avoid requiring consumers ship their own
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+ */
+
+function is(x, y) {
+  // SameValue algorithm
+  if (x === y) {
+    // Steps 1-5, 7-10
+    // Steps 6.b-6.e: +0 != -0
+    // Added the nonzero y check to make Flow happy, but it is redundant
+    return x !== 0 || y !== 0 || 1 / x === 1 / y;
+  } else {
+    // Step 6.a: NaN == NaN
+    return x !== x && y !== y;
+  }
+}
+/**
+ * Performs equality by iterating through keys on an object and returning false
+ * when any key has values which are not strictly equal between the arguments.
+ * Returns true when the values of all keys are strictly equal.
+ */
+
+
+function shallowEqual(objA, objB) {
+  if (is(objA, objB)) {
+    return true;
+  }
+
+  if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {
+    return false;
+  }
+
+  var keysA = Object.keys(objA);
+  var keysB = Object.keys(objB);
+
+  if (keysA.length !== keysB.length) {
+    return false;
+  } // Test for A's keys different from B.
+
+
+  for (var i = 0; i < keysA.length; i++) {
+    if (!hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+module.exports = shallowEqual;
+
+/***/ }),
+
 /***/ "./node_modules/react-apollo/node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js":
 /*!************************************************************************************************************!*\
   !*** ./node_modules/react-apollo/node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js ***!
@@ -39201,7 +39304,7 @@ module.exports = hoistNonReactStatics;
                 t[p[i]] = s[p[i]];
         return t;
     };
-    var shallowEqual = __webpack_require__(/*! fbjs/lib/shallowEqual */ "./node_modules/fbjs/lib/shallowEqual.js");
+    var shallowEqual = __webpack_require__(/*! fbjs/lib/shallowEqual */ "./node_modules/react-apollo/node_modules/fbjs/lib/shallowEqual.js");
     var invariant$4 = __webpack_require__(/*! invariant */ "./node_modules/invariant/browser.js");
     function compact(obj) {
         return Object.keys(obj).reduce(function (acc, key) {
@@ -39494,7 +39597,7 @@ module.exports = hoistNonReactStatics;
         return __assign$2.apply(this, arguments);
     };
     var invariant$5 = __webpack_require__(/*! invariant */ "./node_modules/invariant/browser.js");
-    var shallowEqual$1 = __webpack_require__(/*! fbjs/lib/shallowEqual */ "./node_modules/fbjs/lib/shallowEqual.js");
+    var shallowEqual$1 = __webpack_require__(/*! fbjs/lib/shallowEqual */ "./node_modules/react-apollo/node_modules/fbjs/lib/shallowEqual.js");
     var initialState = {
         loading: false,
         called: false,
@@ -39658,7 +39761,7 @@ module.exports = hoistNonReactStatics;
             d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
         };
     })();
-    var shallowEqual$2 = __webpack_require__(/*! fbjs/lib/shallowEqual */ "./node_modules/fbjs/lib/shallowEqual.js");
+    var shallowEqual$2 = __webpack_require__(/*! fbjs/lib/shallowEqual */ "./node_modules/react-apollo/node_modules/fbjs/lib/shallowEqual.js");
     var invariant$6 = __webpack_require__(/*! invariant */ "./node_modules/invariant/browser.js");
     var Subscription = (function (_super) {
         __extends$4(Subscription, _super);
@@ -40331,7 +40434,7 @@ module.exports = hoistNonReactStatics;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/** @license React v16.8.1
+/** @license React v16.8.3
  * react-dom-server.browser.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -40399,7 +40502,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 
 // TODO: this is special because it gets imported during build.
 
-var ReactVersion = '16.8.1';
+var ReactVersion = '16.8.3';
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -41074,12 +41177,15 @@ var capitalize = function (token) {
   attributeName, 'http://www.w3.org/XML/1998/namespace');
 });
 
-// Special case: this attribute exists both in HTML and SVG.
-// Its "tabindex" attribute name is case-sensitive in SVG so we can't just use
-// its React `tabIndex` name, like we do for attributes that exist only in HTML.
-properties.tabIndex = new PropertyInfoRecord('tabIndex', STRING, false, // mustUseProperty
-'tabindex', // attributeName
-null);
+// These attribute exists both in HTML and SVG.
+// The attribute name is case-sensitive in SVG so we can't just use
+// the React name like we do for attributes that exist only in HTML.
+['tabIndex', 'crossOrigin'].forEach(function (attributeName) {
+  properties[attributeName] = new PropertyInfoRecord(attributeName, STRING, false, // mustUseProperty
+  attributeName.toLowerCase(), // attributeName
+  null);
+} // attributeNamespace
+);
 
 // code copied and modified from escape-html
 /**
@@ -43340,6 +43446,7 @@ var ReactDOMServerRenderer = function () {
   ReactDOMServerRenderer.prototype.destroy = function destroy() {
     if (!this.exhausted) {
       this.exhausted = true;
+      this.clearProviders();
       freeThreadID(this.threadID);
     }
   };
@@ -43396,6 +43503,15 @@ var ReactDOMServerRenderer = function () {
     // We've already verified that this context has been expanded to accommodate
     // this thread id, so we don't need to do it again.
     context[this.threadID] = previousValue;
+  };
+
+  ReactDOMServerRenderer.prototype.clearProviders = function clearProviders() {
+    // Restore any remaining providers on the stack to previous values
+    for (var index = this.contextIndex; index >= 0; index--) {
+      var _context = this.contextStack[index];
+      var previousValue = this.contextValueStack[index];
+      _context[this.threadID] = previousValue;
+    }
   };
 
   ReactDOMServerRenderer.prototype.read = function read(bytes) {
@@ -43563,7 +43679,25 @@ var ReactDOMServerRenderer = function () {
         case REACT_SUSPENSE_TYPE:
           {
             if (enableSuspenseServerRenderer) {
-              var fallbackChildren = toArray(nextChild.props.fallback);
+              var fallback = nextChild.props.fallback;
+              if (fallback === undefined) {
+                // If there is no fallback, then this just behaves as a fragment.
+                var _nextChildren3 = toArray(nextChild.props.children);
+                var _frame3 = {
+                  type: null,
+                  domNamespace: parentNamespace,
+                  children: _nextChildren3,
+                  childIndex: 0,
+                  context: context,
+                  footer: ''
+                };
+                {
+                  _frame3.debugElementStack = [];
+                }
+                this.stack.push(_frame3);
+                return '';
+              }
+              var fallbackChildren = toArray(fallback);
               var _nextChildren2 = toArray(nextChild.props.children);
               var _fallbackFrame2 = {
                 type: null,
@@ -43581,7 +43715,7 @@ var ReactDOMServerRenderer = function () {
                 children: _nextChildren2,
                 childIndex: 0,
                 context: context,
-                footer: ''
+                footer: '<!--/$-->'
               };
               {
                 _frame2.debugElementStack = [];
@@ -43589,7 +43723,7 @@ var ReactDOMServerRenderer = function () {
               }
               this.stack.push(_frame2);
               this.suspenseDepth++;
-              return '';
+              return '<!--$-->';
             } else {
               invariant(false, 'ReactDOMServer does not yet support Suspense.');
             }
@@ -43603,30 +43737,12 @@ var ReactDOMServerRenderer = function () {
           case REACT_FORWARD_REF_TYPE:
             {
               var element = nextChild;
-              var _nextChildren3 = void 0;
+              var _nextChildren4 = void 0;
               var componentIdentity = {};
               prepareToUseHooks(componentIdentity);
-              _nextChildren3 = elementType.render(element.props, element.ref);
-              _nextChildren3 = finishHooks(elementType.render, element.props, _nextChildren3, element.ref);
-              _nextChildren3 = toArray(_nextChildren3);
-              var _frame3 = {
-                type: null,
-                domNamespace: parentNamespace,
-                children: _nextChildren3,
-                childIndex: 0,
-                context: context,
-                footer: ''
-              };
-              {
-                _frame3.debugElementStack = [];
-              }
-              this.stack.push(_frame3);
-              return '';
-            }
-          case REACT_MEMO_TYPE:
-            {
-              var _element = nextChild;
-              var _nextChildren4 = [React.createElement(elementType.type, _assign({ ref: _element.ref }, _element.props))];
+              _nextChildren4 = elementType.render(element.props, element.ref);
+              _nextChildren4 = finishHooks(elementType.render, element.props, _nextChildren4, element.ref);
+              _nextChildren4 = toArray(_nextChildren4);
               var _frame4 = {
                 type: null,
                 domNamespace: parentNamespace,
@@ -43641,13 +43757,12 @@ var ReactDOMServerRenderer = function () {
               this.stack.push(_frame4);
               return '';
             }
-          case REACT_PROVIDER_TYPE:
+          case REACT_MEMO_TYPE:
             {
-              var provider = nextChild;
-              var nextProps = provider.props;
-              var _nextChildren5 = toArray(nextProps.children);
+              var _element = nextChild;
+              var _nextChildren5 = [React.createElement(elementType.type, _assign({ ref: _element.ref }, _element.props))];
               var _frame5 = {
-                type: provider,
+                type: null,
                 domNamespace: parentNamespace,
                 children: _nextChildren5,
                 childIndex: 0,
@@ -43657,10 +43772,29 @@ var ReactDOMServerRenderer = function () {
               {
                 _frame5.debugElementStack = [];
               }
+              this.stack.push(_frame5);
+              return '';
+            }
+          case REACT_PROVIDER_TYPE:
+            {
+              var provider = nextChild;
+              var nextProps = provider.props;
+              var _nextChildren6 = toArray(nextProps.children);
+              var _frame6 = {
+                type: provider,
+                domNamespace: parentNamespace,
+                children: _nextChildren6,
+                childIndex: 0,
+                context: context,
+                footer: ''
+              };
+              {
+                _frame6.debugElementStack = [];
+              }
 
               this.pushProvider(provider);
 
-              this.stack.push(_frame5);
+              this.stack.push(_frame6);
               return '';
             }
           case REACT_CONTEXT_TYPE:
@@ -43693,19 +43827,19 @@ var ReactDOMServerRenderer = function () {
               validateContextBounds(reactContext, threadID);
               var nextValue = reactContext[threadID];
 
-              var _nextChildren6 = toArray(_nextProps.children(nextValue));
-              var _frame6 = {
+              var _nextChildren7 = toArray(_nextProps.children(nextValue));
+              var _frame7 = {
                 type: nextChild,
                 domNamespace: parentNamespace,
-                children: _nextChildren6,
+                children: _nextChildren7,
                 childIndex: 0,
                 context: context,
                 footer: ''
               };
               {
-                _frame6.debugElementStack = [];
+                _frame7.debugElementStack = [];
               }
-              this.stack.push(_frame6);
+              this.stack.push(_frame7);
               return '';
             }
           case REACT_LAZY_TYPE:
@@ -44008,7 +44142,7 @@ if (false) {} else {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/** @license React v16.8.1
+/** @license React v16.8.3
  * react-is.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -44258,12 +44392,12 @@ if (false) {} else {
 
 /***/ "./node_modules/react/index.js":
 /*!*******************************************************************************************!*\
-  !*** delegated ./node_modules/react/index.js from dll-reference dll_31a52253456ff2ce2646 ***!
+  !*** delegated ./node_modules/react/index.js from dll-reference dll_aea5a84f9025b36d9dbf ***!
   \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_31a52253456ff2ce2646 */ "dll-reference dll_31a52253456ff2ce2646"))("./node_modules/react/index.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_aea5a84f9025b36d9dbf */ "dll-reference dll_aea5a84f9025b36d9dbf"))("./node_modules/react/index.js");
 
 /***/ }),
 
@@ -45066,7 +45200,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServerStyleSheet", function() { return ServerStyleSheet; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StyleSheetManager", function() { return StyleSheetManager; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__DO_NOT_USE_OR_YOU_WILL_BE_HAUNTED_BY_SPOOKY_GHOSTS", function() { return __DO_NOT_USE_OR_YOU_WILL_BE_HAUNTED_BY_SPOOKY_GHOSTS; });
-/* harmony import */ var fbjs_lib_hyphenateStyleName__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! fbjs/lib/hyphenateStyleName */ "./node_modules/styled-components/node_modules/fbjs/lib/hyphenateStyleName.js");
+/* harmony import */ var fbjs_lib_hyphenateStyleName__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! fbjs/lib/hyphenateStyleName */ "./node_modules/fbjs/lib/hyphenateStyleName.js");
 /* harmony import */ var fbjs_lib_hyphenateStyleName__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fbjs_lib_hyphenateStyleName__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
@@ -47410,94 +47544,6 @@ var styled = _styled(StyledComponent, constructWithOptions);
 
 /***/ }),
 
-/***/ "./node_modules/styled-components/node_modules/fbjs/lib/hyphenate.js":
-/*!***************************************************************************!*\
-  !*** ./node_modules/styled-components/node_modules/fbjs/lib/hyphenate.js ***!
-  \***************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * @typechecks
- */
-
-var _uppercasePattern = /([A-Z])/g;
-
-/**
- * Hyphenates a camelcased string, for example:
- *
- *   > hyphenate('backgroundColor')
- *   < "background-color"
- *
- * For CSS style names, use `hyphenateStyleName` instead which works properly
- * with all vendor prefixes, including `ms`.
- *
- * @param {string} string
- * @return {string}
- */
-function hyphenate(string) {
-  return string.replace(_uppercasePattern, '-$1').toLowerCase();
-}
-
-module.exports = hyphenate;
-
-/***/ }),
-
-/***/ "./node_modules/styled-components/node_modules/fbjs/lib/hyphenateStyleName.js":
-/*!************************************************************************************!*\
-  !*** ./node_modules/styled-components/node_modules/fbjs/lib/hyphenateStyleName.js ***!
-  \************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * @typechecks
- */
-
-
-
-var hyphenate = __webpack_require__(/*! ./hyphenate */ "./node_modules/styled-components/node_modules/fbjs/lib/hyphenate.js");
-
-var msPattern = /^ms-/;
-
-/**
- * Hyphenates a camelcased CSS property name, for example:
- *
- *   > hyphenateStyleName('backgroundColor')
- *   < "background-color"
- *   > hyphenateStyleName('MozTransition')
- *   < "-moz-transition"
- *   > hyphenateStyleName('msTransition')
- *   < "-ms-transition"
- *
- * As Modernizr suggests (http://modernizr.com/docs/#prefixed), an `ms` prefix
- * is converted to `-ms-`.
- *
- * @param {string} string
- * @return {string}
- */
-function hyphenateStyleName(string) {
-  return hyphenate(string).replace(msPattern, '-ms-');
-}
-
-module.exports = hyphenateStyleName;
-
-/***/ }),
-
 /***/ "./node_modules/stylis-rule-sheet/index.js":
 /*!*************************************************!*\
   !*** ./node_modules/stylis-rule-sheet/index.js ***!
@@ -47908,7 +47954,7 @@ module.exports = hyphenateStyleName;
 									code++
 								}
 								// quote tail delimiter is identical to the head delimiter hence noop,
-								// fallthrough clauses have been shited to the correct tail delimiter
+								// fallthrough clauses have been shifted to the correct tail delimiter
 								case DOUBLEQUOTE:
 								case SINGLEQUOTE: {
 									while (caret++ < eol) {
@@ -48241,12 +48287,7 @@ module.exports = hyphenateStyleName;
 							break
 						}
 						// quotes
-						case DOUBLEQUOTE: {
-							if (comment === 0) {
-								quote = quote === code ? 0 : (quote === 0 ? code : quote)
-							}
-							break
-						}
+						case DOUBLEQUOTE:
 						case SINGLEQUOTE: {
 							if (comment === 0) {
 								quote = quote === code ? 0 : (quote === 0 ? code : quote)
@@ -49051,18 +49092,8 @@ module.exports = hyphenateStyleName;
 				}
 			}
 		}
-
-		switch (out) {
-			case void 0:
-			case false:
-			case true:
-			case null:
-			case content: {
-				break
-			}
-			default: {
-				return out
-			}
+		if (out !== content) {
+		  return out
 		}
 	}
 
@@ -49145,20 +49176,14 @@ module.exports = hyphenateStyleName;
 				break
 			}
 			default: {
-				switch (plugin.constructor) {
-					case Array: {
-						for (var i = 0, length = plugin.length; i < length; ++i) {
-							use(plugin[i])
-						}
-						break
+				if (typeof plugin === 'function') {
+					plugins[plugged++] = plugin
+				}	else if (typeof plugin === 'object') {
+					for (var i = 0, length = plugin.length; i < length; ++i) {
+						use(plugin[i])
 					}
-					case Function: {
-						plugins[plugged++] = plugin
-						break
-					}
-					case Boolean: {
-						unkwn = !!plugin|0
-					}
+				} else {
+					unkwn = !!plugin|0
 				}
 			}
  		}
@@ -50338,12 +50363,12 @@ module.exports = {
 
 /***/ "./node_modules/webpack/buildin/global.js":
 /*!******************************************************************************************************!*\
-  !*** delegated ./node_modules/webpack/buildin/global.js from dll-reference dll_31a52253456ff2ce2646 ***!
+  !*** delegated ./node_modules/webpack/buildin/global.js from dll-reference dll_aea5a84f9025b36d9dbf ***!
   \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_31a52253456ff2ce2646 */ "dll-reference dll_31a52253456ff2ce2646"))("./node_modules/webpack/buildin/global.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_aea5a84f9025b36d9dbf */ "dll-reference dll_aea5a84f9025b36d9dbf"))("./node_modules/webpack/buildin/global.js");
 
 /***/ }),
 
@@ -51091,7 +51116,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_apollo__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_apollo__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _lib_withData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../lib/withData */ "./lib/withData.js");
 
-var _jsxFileName = "/mnt/c/Users/steve/Desktop/HvaShop/frontend/pages/_app.js";
+var _jsxFileName = "C:\\Users\\pc\\Documents\\GitHub\\HvaShop\\frontend\\pages\\_app.js";
 
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -51208,7 +51233,7 @@ function (_App) {
                 return _context.stop();
             }
           }
-        }, _callee, this);
+        }, _callee);
       }));
 
       function getInitialProps(_x) {
@@ -51259,14 +51284,14 @@ return { page: module.exports.default }});
 
 /***/ }),
 
-/***/ "dll-reference dll_31a52253456ff2ce2646":
+/***/ "dll-reference dll_aea5a84f9025b36d9dbf":
 /*!*******************************************!*\
-  !*** external "dll_31a52253456ff2ce2646" ***!
+  !*** external "dll_aea5a84f9025b36d9dbf" ***!
   \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = dll_31a52253456ff2ce2646;
+module.exports = dll_aea5a84f9025b36d9dbf;
 
 /***/ })
 
