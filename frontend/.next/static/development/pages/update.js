@@ -72,7 +72,7 @@ var DisplayError = function DisplayError(_ref) {
       lineNumber: 36
     },
     __self: this
-  }, "\uC624\uC6B0 \uB178\uC6B0!"), error.message.replace('GraphQL error: ', '')));
+  }, "\uC218\uBC15!"), error.message.replace('GraphQL error: ', '')));
 };
 
 DisplayError.defaultProps = {

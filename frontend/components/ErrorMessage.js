@@ -33,7 +33,7 @@ const DisplayError = ({ error }) => {
   return (
     <ErrorStyles>
       <p data-test="graphql-error">
-        <strong>오우 노우!</strong>
+        <strong>수박!</strong>
         {error.message.replace('GraphQL error: ', '')}
       </p>
     </ErrorStyles>
