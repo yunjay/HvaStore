@@ -63,32 +63,17 @@ AWS.EC2MetadataCredentials = AWS.util.inherit(AWS.Credentials, {
    * @see get
    */
   refresh: function refresh(callback) {
-    this.coalesceRefresh(callback || AWS.util.fn.callback);
-  },
-
-  /**
-   * @api private
-   * @param callback
-   */
-  load: function load(callback) {
     var self = this;
-    self.metadataService.loadCredentials(function(err, creds) {
+    if (!callback) callback = function(err) { if (err) throw err; };
+
+    self.metadataService.loadCredentials(function (err, creds) {
       if (!err) {
-        var currentTime = AWS.util.date.getDate();
-        var expireTime = new Date(creds.Expiration);
-        if (expireTime < currentTime) {
-          err = AWS.util.error(
-            new Error('EC2 Instance Metadata Serivce provided expired credentials'),
-            { code: 'EC2MetadataCredentialsProviderFailure' }
-          );
-        } else {
-          self.expired = false;
-          self.metadata = creds;
-          self.accessKeyId = creds.AccessKeyId;
-          self.secretAccessKey = creds.SecretAccessKey;
-          self.sessionToken = creds.Token;
-          self.expireTime = expireTime;
-        }
+        self.expired = false;
+        self.metadata = creds;
+        self.accessKeyId = creds.AccessKeyId;
+        self.secretAccessKey = creds.SecretAccessKey;
+        self.sessionToken = creds.Token;
+        self.expireTime = new Date(creds.Expiration);
       }
       callback(err);
     });

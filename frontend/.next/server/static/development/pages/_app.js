@@ -643,10 +643,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
- //createClient we made
-//next js automatically wraps your shit in <App>.
-//This is a customized App extending App  from next/app
-//
+
 
 var MyApp =
 /*#__PURE__*/
@@ -662,34 +659,33 @@ function (_App) {
   _createClass(MyApp, [{
     key: "render",
     value: function render() {
-      //if you include apollo below you can remove this.props
       var _this$props = this.props,
           Component = _this$props.Component,
-          pageProps = _this$props.pageProps; //Component will be the page that is being rendered
-
+          apollo = _this$props.apollo,
+          pageProps = _this$props.pageProps;
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_app__WEBPACK_IMPORTED_MODULE_2__["Container"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 26
+          lineNumber: 20
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_apollo__WEBPACK_IMPORTED_MODULE_4__["ApolloProvider"], {
-        client: this.props.apollo,
+        client: apollo,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 27
+          lineNumber: 21
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Page__WEBPACK_IMPORTED_MODULE_3__["default"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 28
+          lineNumber: 22
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Component, _extends({}, pageProps, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 29
+          lineNumber: 23
         },
         __self: this
       })))));
@@ -706,7 +702,6 @@ function (_App) {
             switch (_context.prev = _context.next) {
               case 0:
                 Component = _ref.Component, ctx = _ref.ctx;
-                //next js lifecycle -> runs before render
                 pageProps = {};
 
                 if (!Component.getInitialProps) {
@@ -721,9 +716,11 @@ function (_App) {
                 pageProps = _context.sent;
 
               case 6:
-                //exposes the query to user
+                // exposes the query to the user
                 pageProps.query = ctx.query;
-                return _context.abrupt("return", pageProps);
+                return _context.abrupt("return", {
+                  pageProps: pageProps
+                });
 
               case 8:
               case "end":
@@ -744,7 +741,7 @@ function (_App) {
   return MyApp;
 }(next_app__WEBPACK_IMPORTED_MODULE_2___default.a);
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(_lib_withData__WEBPACK_IMPORTED_MODULE_5__["default"])(MyApp)); //make apollo client accesible via this.props
+/* harmony default export */ __webpack_exports__["default"] = (Object(_lib_withData__WEBPACK_IMPORTED_MODULE_5__["default"])(MyApp));
 
 /***/ }),
 

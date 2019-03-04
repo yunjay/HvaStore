@@ -18,14 +18,16 @@ const CREATE_ITEM_MUTATION = gql`
       $description: String!
       $price: Int!
       $image: String
-      $largeImage: String){
+      $largeimage: String){
     createItem(
       title: $title
       description: $description
       price: $price
       image: $image
-      largeImage: $largeImage
-    )
+      largeimage: $largeimage
+    ){
+      id
+    }
   }
 `;
 
@@ -34,7 +36,7 @@ class CreateItem extends Component {
     title:'',
     description:'',
     image:'',
-    largeImage:'',
+    largeimage:'',
     price:0,
   }
   //instance property through arrow function
@@ -46,6 +48,27 @@ class CreateItem extends Component {
     this.setState({[name]: val})
   }
   
+  uploadFile = async (e)=>{
+    console.log("uploading file...");
+    const files = e.target.files;
+    const data = new FormData();
+    data.append('file',files[0]);
+    data.append('upload_preset','HvaStore');
+//uploads image to cloudindary
+    const res = await fetch ('https://api.cloudinary.com/v1_1/yunjay/image/upload',
+    {
+      method: 'POST',
+      body:data
+    });
+    const file = await res.json();
+    console.log(file);
+    this.setState({
+      image: file.secure_url,
+      largeimage:file.eager[0].secure_url,
+    })
+    
+  }
+
   render() {
     return (
     <Mutation mutation={CREATE_ITEM_MUTATION }
@@ -66,6 +89,14 @@ class CreateItem extends Component {
       }}>
       <Error error={error}/>
         <fieldset disabled={loading} aria-busy={loading}>
+          <label htmlFor="file">
+            이미지 파일
+            <input type="file" id="file" name="file"
+            placeholder="이미지를 업로드해주세요" required 
+            onChange={this.uploadFile}/>
+              {this.state.image && 
+              <img width="200" src={this.state.image} alt="미리보기"/>}
+          </label>
           <label htmlFor="title">
             이름
             <input type="text" id="title" name="title"

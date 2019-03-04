@@ -9,6 +9,9 @@ const Query = {
     //     const items = await ctx.db.Query.items();
     //     return items;
     // },
+    item: forwardTo('db'), //no extra logic
+
+
 };
 
 module.exports = Query;

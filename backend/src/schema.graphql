@@ -2,13 +2,24 @@
 graphql imports with comments like below -> imports Item type"""
 # import * from './generated/prisma.graphql'
 type Mutation{
-    createItem(title:String,description:String,image: String,
-  largeimage: String,
-  price: Int,
-  createdAt: DateTime,
-  updatedAt: DateTime,) : Item!
+  createItem(title:String,
+    description:String,
+    largeimage: String,
+    image:String,
+    price: Int,
+    createdAt: DateTime,
+    updatedAt: DateTime,) : Item!
+    
+  updateItem(
+    id:ID!
+    title: String,
+    description: String,
+    price: Int,   
+  ) : Item!
 }
 
 type Query{
     items:[Item]!
+    item(where:ItemWhereUniqueInput!):Item
 }
+
